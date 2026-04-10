@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,6 +10,29 @@
 
   <body>
     <div id="root">
+      <main>
+        <aside>
+          <select name="sidebar" id="sidebar"></select>
+        </aside>
+        <form role="search">
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Type to search..."
+          />
+          <p id="number-of-movies"></p>
+        </form>
+        <section id="episodes-section">
+          <template id="movie-card">
+            <section>
+              <h3></h3>
+              <img src="" alt="" />
+              <p></p>
+              <a href=""></a>
+            </section>
+          </template>
+        </section>
+      </main>
     </div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
