@@ -2,10 +2,11 @@ const episodesElem = document.getElementById("episodes-section");
 const movieCardTemplate = document.getElementById("movie-card");
 const searchInput = document.getElementById("search-input");
 const numberOfMovies = document.getElementById("number-of-movies");
-const sidebar = document.getElementById("sidebar");
+const episodeDropDown = document.getElementById("episode-dropdown");
 
 const EPISODES_URL = "https://api.tvmaze.com/shows/82/episodes";
 
+let numberOfEpisodes = 0;
 async function setup() {
   // Show loading message while fetching
   episodesElem.innerHTML = `<p class="info-text">Loading episodes...</p>`;
@@ -14,36 +15,26 @@ async function setup() {
     const response = await fetch(EPISODES_URL);
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
+      throw new Error(
+        `Failed to fetch: ${response.status} ${response.statusText}`,
+      );
     }
 
     const allEpisodes = await response.json();
+    numberOfEpisodes = allEpisodes.length;
 
     // Now that we have data, initialize the UI
     makeDropDownForEpisodes(allEpisodes);
     makePageForEpisodes(allEpisodes);
 
     // Re-attach listeners using the fetched data
-    searchInput.addEventListener("input", (e) => {
-      const term = e.target.value.toLowerCase();
-      const filteredEpisodeList = allEpisodes.filter(
-        ({ name, summary }) =>
-          name.toLowerCase().includes(term) ||
-          summary.toLowerCase().includes(term),
-      );
-      makePageForEpisodes(filteredEpisodeList);
-    });
+    searchInput.addEventListener("input", (e) =>
+      searchEpisodes(e, allEpisodes),
+    );
 
-    sidebar.addEventListener("change", (e) => {
-      const selectedEpisode = e.target.value;
-      const episode = !selectedEpisode
-        ? allEpisodes
-        : allEpisodes.filter(
-            ({ name }) => name.toLowerCase() === selectedEpisode,
-          );
-      makePageForEpisodes(episode);
-    });
-
+    episodeDropDown.addEventListener("change", (e) =>
+      populateEpisodeDropDown(e, allEpisodes),
+    );
   } catch (error) {
     // Notify user of error (Requirement 5)
     episodesElem.innerHTML = `
@@ -55,6 +46,8 @@ async function setup() {
     `;
   }
 }
+
+window.onload = setup;
 
 function makeDropDownForEpisodes(episodeList) {
   const options = episodeList.map(({ name, season, number }) => {
@@ -69,18 +62,21 @@ function makeDropDownForEpisodes(episodeList) {
   defaultOption.textContent = "All episodes";
   options.unshift(defaultOption);
 
-  sidebar.innerHTML = ""; // Ensure sidebar is clear
-  sidebar.append(...options);
+  episodeDropDown.innerHTML = ""; // Ensure episodeDropDown is clear
+  episodeDropDown.append(...options);
 }
 
 function makeTitle(name, season, number, dropDown = false) {
   if (dropDown)
+    // Creates title for dropdown menu
     return `S${String(season).padStart(2, "0")}E${String(number).padStart(2, "0")} - ${name}`;
+
+  // creates title for each movie card
   return `${name} - S${String(season).padStart(2, "0")}E${String(number).padStart(2, "0")}`;
 }
 
 function makePageForEpisodes(episodeList) {
-  numberOfMovies.textContent = `${episodeList.length}${episodeList.length === 1 ? " movie" : " movies"}`;
+  numberOfMovies.textContent = `Displaying ${episodeList.length} / ${numberOfEpisodes} episodes`;
   episodesElem.textContent = "";
   const movieCards = episodeList.map(
     ({ name, season, number, image, summary, url }) => {
@@ -102,5 +98,20 @@ function makePageForEpisodes(episodeList) {
 
   episodesElem.append(...movieCards);
 }
+function searchEpisodes(e, allEpisodes) {
+  const term = e.target.value.toLowerCase();
+  const filteredEpisodeList = allEpisodes.filter(
+    ({ name, summary }) =>
+      name.toLowerCase().includes(term) || summary.toLowerCase().includes(term),
+  );
+  makePageForEpisodes(filteredEpisodeList);
+}
 
-window.onload = setup;
+function populateEpisodeDropDown(e, allEpisodes) {
+  const selectedEpisode = e.target.value;
+  // if no episode selected, show all
+  const episode = !selectedEpisode
+    ? allEpisodes
+    : allEpisodes.filter(({ name }) => name.toLowerCase() === selectedEpisode);
+  makePageForEpisodes(episode);
+}
