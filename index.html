@@ -14,7 +14,7 @@
         <aside>
           <select name="sidebar" id="sidebar"></select>
         </aside>
-        <form role="search">
+        <form role="search" onsubmit="return false;">
           <input
             id="search-input"
             type="search"
@@ -22,23 +22,20 @@
           />
           <p id="number-of-movies"></p>
         </form>
-        <section id="episodes-section">
-          <template id="movie-card">
-            <section>
-              <h3></h3>
-              <img src="" alt="" />
-              <p></p>
-              <a href=""></a>
-            </section>
-          </template>
-        </section>
+        
+        <section id="episodes-section"></section>
+        
+        <template id="movie-card">
+          <section class="episode-card">
+            <h3></h3>
+            <img src="" alt="" />
+            <p></p>
+            <a href="" target="_blank"></a>
+          </section>
+        </template>
       </main>
     </div>
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
-
-    <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
   </body>
 </html>
