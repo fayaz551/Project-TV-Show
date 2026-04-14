@@ -25,7 +25,7 @@ async function setup() {
 window.onload = setup;
 
 function makeDropDownForShows(showList) {
-  console.log(showList.sort((a, b) => a.name.localeCompare(b.name)));
+  showList.sort((a, b) => a.name.localeCompare(b.name));
   const options = showList.sort().map(({ name, id }) => {
     const option = document.createElement("option");
     option.value = id;
@@ -35,7 +35,7 @@ function makeDropDownForShows(showList) {
 
   showDropDown.innerHTML = ""; // Ensure showDropDown is clear
   showDropDown.append(...options);
-  showEpisodes(1);
+  showEpisodes(showList[0].id);
   showDropDown.addEventListener("change", async (e) => {
     const id = e.target.value;
     searchInput.value = "";
