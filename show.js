@@ -15,7 +15,6 @@ async function getShow() {
     console.error(error);
   }
 }
-getShow();
 
 async function getEpisode(id = 82) {
   const EPISODES_URL = `https://api.tvmaze.com/shows/${id}/episodes`;

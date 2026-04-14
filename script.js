@@ -1,6 +1,6 @@
 const episodesElem = document.getElementById("episodes-section");
 const episodeCardTemplate = document.getElementById("episode-card-template");
-const searchInput = document.getElementById("search-input");
+let searchInput = document.getElementById("search-input");
 const numberOfMovies = document.getElementById("number-of-movies");
 const showDropDown = document.getElementById("show-dropdown");
 const episodeDropDown = document.getElementById("episode-dropdown");
@@ -58,6 +58,9 @@ async function showEpisodes(id) {
 
     populateEpisodeDropDown(e, allEpisodes);
   });
+  const newSearchInput = searchInput.cloneNode(true);
+  searchInput.parentNode.replaceChild(newSearchInput, searchInput);
+  searchInput = newSearchInput;
   searchInput.addEventListener("input", (e) => searchEpisodes(e, allEpisodes));
 }
 
