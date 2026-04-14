@@ -3,39 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | Said Fayaz Sadat (Fayaz551)</title>
+    <title>TV Show Project | Level 500</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
     <div id="root">
-      <main>
-        <div>
-          <aside>
+      <header id="sticky-header">
+        <nav id="navigation">
+          <button id="back-to-shows-btn" class="hidden">⬅ Back to all shows</button>
+        </nav>
+
+        <div id="controls-container">
+          <aside id="show-select-wrapper">
             <select name="show-dropdown" id="show-dropdown"></select>
           </aside>
-          <aside>
+          
+          <aside id="episode-select-wrapper" class="hidden">
             <select name="episode-dropdown" id="episode-dropdown"></select>
           </aside>
+
           <form role="search" onsubmit="return false;">
-            <input
-              id="search-input"
-              type="search"
-              placeholder="Type to search..."
-            />
+            <input id="search-input" type="search" placeholder="Search..." />
             <p id="number-of-movies"></p>
           </form>
         </div>
+      </header>
 
-        <section id="episodes-section"></section>
+      <main>
+        <section id="listing-section"></section>
+
+        <template id="show-card-template">
+          <section class="show-card">
+            <h2 class="show-title"></h2>
+            <div class="show-content">
+              <img class="show-image" src="" alt="" />
+              <div class="show-summary"></div>
+              <div class="show-info">
+                <p class="show-rating"></p>
+                <p class="show-genres"></p>
+                <p class="show-status"></p>
+                <p class="show-runtime"></p>
+              </div>
+            </div>
+          </section>
+        </template>
 
         <template id="episode-card-template">
           <section class="episode-card">
             <h3></h3>
-            <img src="" alt="" />
+            <div class="episode-img-container">
+              <img src="" alt="" />
+            </div>
             <p></p>
-            <a href="" target="_blank"></a>
+            <a href="" target="_blank">View on TVMaze</a>
           </section>
         </template>
       </main>
