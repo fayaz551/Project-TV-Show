@@ -1,3 +1,40 @@
-#root {
-  color: red;
+body {
+  margin: 0;
+}
+
+main {
+  background-color: #f4efef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main div form {
+  display: flex;
+  align-items: center;
+}
+
+#episodes-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.episode-card {
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.episode-card img {
+  width: 70%;
 }
