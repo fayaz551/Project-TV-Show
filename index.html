@@ -11,21 +11,26 @@
   <body>
     <div id="root">
       <main>
-        <aside>
-          <select name="sidebar" id="sidebar"></select>
-        </aside>
-        <form role="search" onsubmit="return false;">
-          <input
-            id="search-input"
-            type="search"
-            placeholder="Type to search..."
-          />
-          <p id="number-of-movies"></p>
-        </form>
-        
+        <div>
+          <aside>
+            <select name="show-dropdown" id="show-dropdown"></select>
+          </aside>
+          <aside>
+            <select name="episode-dropdown" id="episode-dropdown"></select>
+          </aside>
+          <form role="search" onsubmit="return false;">
+            <input
+              id="search-input"
+              type="search"
+              placeholder="Type to search..."
+            />
+            <p id="number-of-movies"></p>
+          </form>
+        </div>
+
         <section id="episodes-section"></section>
-        
-        <template id="movie-card">
+
+        <template id="episode-card-template">
           <section class="episode-card">
             <h3></h3>
             <img src="" alt="" />
@@ -36,6 +41,7 @@
       </main>
     </div>
 
+    <script src="show.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
