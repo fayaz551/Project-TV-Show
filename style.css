@@ -13,7 +13,7 @@ body {
   color: var(--text);
 }
 
-/* Fixed Header Logic */
+
 #sticky-header {
   position: sticky;
   top: 0;
@@ -52,7 +52,6 @@ select:focus, input:focus {
   color: var(--primary);
 }
 
-/* Listing Grid */
 #listing-section {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -62,7 +61,7 @@ select:focus, input:focus {
   margin: 0 auto;
 }
 
-/* Show Cards */
+
 .show-card {
   background-color: var(--card);
   border-radius: 8px;
@@ -97,6 +96,7 @@ select:focus, input:focus {
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 6;
+  line-clamp: 6;
   -webkit-box-orient: vertical;
 }
 
@@ -108,7 +108,6 @@ select:focus, input:focus {
   border-radius: 4px;
 }
 
-/* Episode Cards */
 .episode-card {
   background: var(--card);
   border-radius: 8px;
@@ -127,7 +126,6 @@ select:focus, input:focus {
   font-weight: bold;
 }
 
-/* Back Button */
 #back-to-shows-btn {
   background: var(--primary);
   color: white;
